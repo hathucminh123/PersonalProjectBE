@@ -1,0 +1,10 @@
+﻿# Ignore sensitive config files
+appsettings.json
+.env
+
+# Ignore build files
+bin/
+obj/
+.vs/
+*.user
+*.suo
