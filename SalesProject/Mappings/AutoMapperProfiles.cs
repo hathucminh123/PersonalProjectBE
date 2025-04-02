@@ -80,10 +80,22 @@ namespace SalesProject.Mappings
 
             CreateMap<SubCategory, SubCategoryDTO>().ReverseMap();
 
-            CreateMap<CreateAddressRequest, Address>();
+            CreateMap<CreateAddressRequest, Address>().ReverseMap();
 
 
-            CreateMap<Address, AddressResponse>();
+            CreateMap<CreateAddressRequestDto, Address>().ReverseMap();
+
+
+
+            CreateMap<UpdateAddressRequestDto, Address>().ForMember(dest => dest.Id,
+                        opt => opt.MapFrom(src => src.AddressId)).ReverseMap();
+
+            CreateMap<Address, AddressResponse>().ReverseMap();
+
+
+            CreateMap<DeleteAddressUser,Address>().ForMember(dest => dest.Id,
+                        opt => opt.MapFrom(src => src.AdsressId))
+             .ReverseMap(); 
 
         }
 

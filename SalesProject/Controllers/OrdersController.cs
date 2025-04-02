@@ -56,26 +56,30 @@ namespace SalesProject.Controllers
 
 
         [HttpPost]
-        
+
+        [HttpPost("create-order")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
         {
             try
             {
-                var shippingAddressInput = mapper.Map<Address>(request.shippingAddressInput);
+                // Nếu người dùng truyền địa chỉ mới thì map sang Address
+                Address? shippingAddressInput = null;
+                if (request.shippingAddressInput != null)
+                {
+                    shippingAddressInput = mapper.Map<Address>(request.shippingAddressInput);
+                }
 
-                var order = await ordersRepository.CreateOrderAsync(request.userId, shippingAddressInput, request.PaymentMethod, request.DiscountCode);
+                // Gọi service tạo đơn hàng (cho phép truyền Address hoặc AddressId)
+                var order = await ordersRepository.CreateOrderAsync(
+                    request.userId,
+                    shippingAddressInput,
+                    request.ShippingAddressId,
+                    request.PaymentMethod,
+                    request.DiscountCode
+                );
 
-
-                var orderDto =  mapper.Map< OrderDto > (order);
-
-                //return Ok(new
-                //{
-                //    order.Id,
-                //    order.UserId,
-                //    order.TotalPrice,
-                //    order.DiscountAmount,
-                //    order.Status
-                //});
+                // Trả về kết quả dưới dạng DTO
+                var orderDto = mapper.Map<OrderDto>(order);
                 return Ok(orderDto);
             }
             catch (Exception ex)
@@ -83,6 +87,7 @@ namespace SalesProject.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
 
     }
 }

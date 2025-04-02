@@ -13,6 +13,7 @@ namespace SalesProject.Models.Domain
         [Required]
         public Guid UserId { get; set; }
 
+
         [ForeignKey("UserId")]
         public Users? User { get; set; } // Một Order thuộc về một User
 
@@ -34,6 +35,9 @@ namespace SalesProject.Models.Domain
         public Address? ShippingAddress { get; set; }
 
         public PaymentMethodEnum PaymentMethod { get; set; }
+
+        public string OrderCode { get; set; } = string.Empty;
+
 
         public ICollection<OrderDetails>? OrderDetails { get; set; }
 

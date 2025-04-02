@@ -21,4 +21,6 @@ public class UserDto
     public List<OrderDto>? Orders { get; set; }
     public List<CartDTO>? CartItems { get; set; }
     public List<ReviewDto>? Reviews { get; set; }
+
+    public List<AddressResponse>? Addresses { get; set; }
 }

@@ -19,6 +19,7 @@ namespace SalesProject.Repositories
                 .Include(x => x.Orders)
                 .Include(x => x.CartItems)
                 .Include(x => x.Reviews)
+                .Include(x => x.Addresses)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(x => x.Id == id);
 

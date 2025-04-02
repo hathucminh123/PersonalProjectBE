@@ -7,8 +7,9 @@ namespace SalesProject.Models.DTOs.Request
 
         public Guid userId { get; set; }
 
+        public Guid? ShippingAddressId { get; set; }
 
-        public CreateAddressRequest?shippingAddressInput { get; set; }
+        public CreateAddressRequest? shippingAddressInput { get; set; }
 
         public PaymentMethodEnum PaymentMethod{ get; set; }
         public string DiscountCode { get; set; } = string.Empty;

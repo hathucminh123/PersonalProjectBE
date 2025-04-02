@@ -69,6 +69,9 @@ builder.Services.AddScoped<ICompareRepository, CompareRepository>();
 builder.Services.AddScoped<IProductRepository, ProductService>();
 builder.Services.AddScoped<ISubCategoryRepository, SubCategoryService>();
 builder.Services.AddScoped<ICategory, CategoryService>();
+builder.Services.AddScoped<IEmailRepository, EmailService>();
+builder.Services.AddScoped<IAddressRepository, AddressService>();
+
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));

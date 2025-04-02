@@ -61,6 +61,13 @@ namespace SalesProject.Configuration
 
             builder.Property(o => o.CreatedAt)
                    .HasDefaultValueSql("CURRENT_TIMESTAMP AT TIME ZONE 'UTC'");
+
+
+            builder.Property(o => o.OrderCode)
+                   .IsRequired()
+                   .HasMaxLength(50);
+
+
         }
     }
 }
