@@ -72,6 +72,9 @@ builder.Services.AddScoped<ICategory, CategoryService>();
 builder.Services.AddScoped<IEmailRepository, EmailService>();
 builder.Services.AddScoped<IAddressRepository, AddressService>();
 
+builder.Services.AddScoped<IVnPayService, VnPayService>();
+
+
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
@@ -149,7 +152,8 @@ builder.Services.AddCors(options =>
         {
             policy.WithOrigins("http://localhost:5173") // ✅ FE URL
                   .AllowAnyHeader()
-                  .AllowAnyMethod();
+                  .AllowAnyMethod()
+             .AllowAnyOrigin();
         });
 });
 var app = builder.Build();
@@ -166,7 +170,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
+app.UseRouting();
 
+app.UseCors("AllowAll");
 app.MapControllers();
 
 app.Run();

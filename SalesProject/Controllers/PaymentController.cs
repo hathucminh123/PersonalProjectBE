@@ -1,38 +1,53 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using SalesProject.Dtos;
+﻿using Microsoft.AspNetCore.Mvc;
+using SalesProject.Interface;
 using SalesProject.Models.Domain;
-namespace SalesProject.Controllers;
-[ApiController]
-[Route("api/[controller]")]
-public class PaymentController : ControllerBase
+using SalesProject.Models.DTOs.Response;
+
+namespace SalesProject.Controllers
 {
-    private readonly PaymentService _paymentService;
-    private readonly IMapper _mapper;
-
-    public PaymentController(PaymentService paymentService, IMapper mapper)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class PaymentController : ControllerBase
     {
-        _paymentService = paymentService;
-        _mapper = mapper;
-    }
+        private readonly IVnPayService _vnPayService;
+        private readonly IPaymentRespository _paymentService;
 
-    // 🔹 Xử lý thanh toán cho đơn hàng
-    [HttpPost("pay")]
-    public async Task<IActionResult> Pay(Guid orderId, PaymentMethodEnum paymentMethod)
-    {
-        try
+        public PaymentController(IVnPayService vnPayService,IPaymentRespository paymentService)
         {
-            var payment = await _paymentService.ProcessPaymentAsync(orderId, paymentMethod);
-
-            // ✅ Dùng AutoMapper để ánh xạ từ Domain sang DTO
-            var paymentDto = _mapper.Map<PaymentDto>(payment);
-
-            // ✅ Trả về DTO đã được ánh xạ
-            return Ok(paymentDto);
+            _vnPayService = vnPayService;
+            _paymentService = paymentService;
         }
-        catch (Exception ex)
+
+        [HttpPost("vnpay/create")]
+        public async Task<IActionResult> CreateVnPayPayment([FromQuery] Guid orderId)
         {
-            return BadRequest(new { message = ex.Message });
+            try
+            {
+                var baseReturnUrl = $"{Request.Scheme}://{Request.Host}/api/payment/PaymentCallbackVnpay";
+                var result = await _paymentService.CreateVnPayPaymentAsync(orderId, baseReturnUrl);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Tạo URL thanh toán VNPay và redirect người dùng
+        /// </summary>
+        [HttpPost]
+        public IActionResult CreatePaymentUrlVnpay([FromBody] PaymentInformationModel model)
+        {
+            var url = _vnPayService.CreatePaymentUrl(model, HttpContext);
+            return Ok(new { paymentUrl = url }); // dùng Ok để test dễ
+        }
+
+        [HttpGet]
+        public IActionResult PaymentCallbackVnpay()
+        {
+            var response = _vnPayService.PaymentExecute(Request.Query);
+            return new JsonResult(response);
         }
     }
 }

@@ -45,6 +45,8 @@ namespace SalesProject.Models.Domain
         PayPal = 1,
         VNPay = 2,
         MoMo = 3,
-        BankTransfer = 4
+        BankTransfer = 4,
+CashOnDelivery=5
+
     }
 }
