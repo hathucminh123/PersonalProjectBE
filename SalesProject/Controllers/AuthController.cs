@@ -12,6 +12,7 @@ using System.Text;
 using Google.Apis.Auth;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Generators;
+using SalesProject.Interface;
 //using Microsoft.AspNetCore.Identity.Data;
 namespace SalesProject.Controllers;
 
@@ -22,12 +23,14 @@ public class AuthController : ControllerBase
     private readonly UserManager<IdentityUser> _userManager;
     private readonly IConfiguration _config;
     private readonly SalesDbContext _context;
+    private readonly IEmailRepository _email;
 
-    public AuthController(UserManager<IdentityUser> userManager, IConfiguration config, SalesDbContext context   )
+    public AuthController(UserManager<IdentityUser> userManager, IConfiguration config, SalesDbContext context ,IEmailRepository emailRepository  )
     {
         _userManager = userManager;
         _config = config;
         _context = context;
+        _email = emailRepository;
     }
 
     //[HttpPost("register/{email}/{password}")]
@@ -88,7 +91,28 @@ public class AuthController : ControllerBase
         await _context.SaveChangesAsync();
 
         // ✅ Gửi mã xác nhận qua email
-        await SendEmailAsync(request.Email, emailConfirmationCode);
+        await SendEmailAsync(request.Email, emailConfirmationCode); 
+        
+        
+        var subject = "Xác nhận Tài khoản";
+        var body = $@"
+Xin chào {request.FullName},
+
+Cảm ơn bạn đã đăng ký tài khoản tại hệ thống của chúng tôi!
+
+Để hoàn tất đăng ký, vui lòng sử dụng mã xác nhận sau:
+
+🔐 Mã xác nhận: {emailConfirmationCode}
+
+Nếu bạn không yêu cầu đăng ký tài khoản, vui lòng bỏ qua email này.
+
+Trân trọng,
+Đội ngũ hỗ trợ khách hàng
+";
+
+
+
+        await _email.SendEmailAsync(request.Email, subject, body);
 
         return Ok("Registration successful. Please check your email to confirm your account.");
     }

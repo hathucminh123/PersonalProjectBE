@@ -5,8 +5,9 @@ namespace SalesProject.Interface
 {
     public interface IVnPayService
     {
-        string CreatePaymentUrl(PaymentInformationModel model, HttpContext context);
-        PaymentResponseModel PaymentExecute(IQueryCollection collections);
+        Task<string> CreatePaymentUrl(PaymentInformationModel model, HttpContext context);
+        Task<PaymentResponseModel> PaymentExecuteAsync(IQueryCollection collections);
+
 
     }
 }
