@@ -104,7 +104,23 @@ public class UsersController : ControllerBase
                     ImageUrl = review.Product.ImageUrl
                 } : null,
                 Rating = review.Rating
-            }).ToList()
+            }).ToList(),
+            Addresses = user.Addresses?.Select(address =>new AddressResponse
+            {
+                Id = address.Id,
+                FullName =address.FullName,
+                Phone =address.Phone,
+                Province =address.Province,
+                District= address.District,
+                StreetAddress=address.StreetAddress,
+                Ward= address.Ward,
+                Email=address.Email,
+                IsDefault =address.IsDefault,
+                CreatedAt =address.CreatedAt,
+
+            }).ToList(),
+
+
         };
 
         return Ok(userDto);

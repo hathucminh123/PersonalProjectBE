@@ -7,6 +7,9 @@
         public int Quantity { get; set; }
         public decimal Price { get; set; }
 
+
+        public string ImageUrl { get; set; } = string.Empty;
+
         // Thêm set nếu bạn muốn gán giá trị từ entity
         public decimal TotalPrice { get; set; }
     }

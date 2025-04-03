@@ -4,7 +4,7 @@
     {
 
 
-        public Guid AdsressId { get; set; }
+        public Guid AddressId { get; set; }
 
 
         public Guid UserId { get; set; }

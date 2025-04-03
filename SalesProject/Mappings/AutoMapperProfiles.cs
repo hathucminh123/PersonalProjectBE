@@ -54,8 +54,9 @@ namespace SalesProject.Mappings
                     opt.MapFrom(src => src.PaymentMethod));
 
             CreateMap<OrderDetails, OrderDetailsDto>()
-                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product !=null ? src.Product.Name : "No name"));
-           
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product !=null ? src.Product.Name : "No name"))
+                          .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Product != null ? src.Product.ImageUrl : "No Image"));
+
             CreateMap<OrderDiscounts, DiscountDto>()
        .ForMember(dest => dest.Code, opt => opt.MapFrom(src => src.Discount != null ? src.Discount.Code : "no code"))
        .ForMember(dest => dest.DiscountType, opt => opt.MapFrom(src => src.Discount != null ? src.Discount.DiscountType.ToString() : "No Type"))
@@ -94,7 +95,7 @@ namespace SalesProject.Mappings
 
 
             CreateMap<DeleteAddressUser,Address>().ForMember(dest => dest.Id,
-                        opt => opt.MapFrom(src => src.AdsressId))
+                        opt => opt.MapFrom(src => src.AddressId))
              .ReverseMap(); 
 
         }
