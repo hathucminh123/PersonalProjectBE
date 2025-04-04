@@ -32,6 +32,11 @@ namespace SalesProject.Configuration
                    .OnDelete(DeleteBehavior.Cascade); // Xóa Order thì xóa OrderDiscounts
 
 
+            builder.Property(p => p.PaymentStatus)
+              .HasConversion<string>()
+              .HasDefaultValue(PaymentStatusEnum.Pending)
+              .IsRequired();
+
             builder.HasOne(o => o.ShippingAddress)
                   .WithMany()
                   .HasForeignKey(o => o.ShippingAddressId)

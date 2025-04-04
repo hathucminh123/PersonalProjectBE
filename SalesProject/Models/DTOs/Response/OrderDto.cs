@@ -13,6 +13,10 @@ namespace SalesProject.Models.DTOs.Response
         public decimal ShippingFee { get; set; }
         public OrderStatusEnum Status { get; set; } = OrderStatusEnum.Pending;
 
+
+
+        public string PaymentStatus { get; set; } = "Pending";
+
         public AddressResponse? ShippingAddress { get; set; }
 
 

@@ -14,7 +14,7 @@ namespace SalesProject.Mappings
         {
 
             CreateMap<Discounts , DiscountResponseDto>().ReverseMap();
-            CreateMap<Discounts, DiscountRequestDto>().ReverseMap();
+            CreateMap<DiscountRequestDto, Discounts>().ReverseMap();
             CreateMap<UserRequest, Users>().ReverseMap();
             CreateMap<Users, UserDto>().ReverseMap();
             CreateMap<Products, ProductDto>()
@@ -51,7 +51,9 @@ namespace SalesProject.Mappings
                 .ForMember(dest => dest.ShippingAddress, opt =>
                     opt.MapFrom(src => src.ShippingAddress))
                .ForMember(dest => dest.PaymentMethod, opt =>
-                    opt.MapFrom(src => src.PaymentMethod));
+                    opt.MapFrom(src => src.PaymentMethod))
+               .ForMember(dest => dest.PaymentStatus, opt =>
+                    opt.MapFrom(src => src.PaymentStatus));
 
             CreateMap<OrderDetails, OrderDetailsDto>()
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product !=null ? src.Product.Name : "No name"))
@@ -96,7 +98,16 @@ namespace SalesProject.Mappings
 
             CreateMap<DeleteAddressUser,Address>().ForMember(dest => dest.Id,
                         opt => opt.MapFrom(src => src.AddressId))
-             .ReverseMap(); 
+             .ReverseMap();
+
+
+
+            CreateMap<AddFavoriteProducts, FavoriteProducts>()
+               .ReverseMap();
+
+
+            CreateMap<FavoriteProducts, AddFavoriteProductsRespone>();
+              
 
         }
 

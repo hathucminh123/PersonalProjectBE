@@ -47,9 +47,15 @@ namespace SalesProject.Models.Domain
         // Quan hệ với các bảng khác
         public ICollection<Orders>? Orders { get; set; } // Một User có nhiều Orders
         public ICollection<Reviews>? Reviews { get; set; } // Một User có nhiều Reviews
-        public ICollection<Cart>? CartItems { get; set; } // Một User có nhiều sản phẩm trong giỏ hàng
+        public ICollection<Cart> CartItems { get; set; } = new List<Cart>();// Một User có nhiều sản phẩm trong giỏ hàng 
 
         public ICollection<Address>? Addresses  { get; set; }
+
+
+        public ICollection<FavoriteProducts> favoriteProducts { get; set; } = new List<FavoriteProducts>(); // Một User có nhiều sản phẩm yêu thích
+
+
+        public ICollection<CompareProduct> CompareProducts { get; set; } = new List<CompareProduct>(); // Một User có nhiều sản phẩm so sánh
 
     }
 

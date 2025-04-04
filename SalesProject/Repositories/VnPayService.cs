@@ -87,6 +87,7 @@ namespace SalesProject.Repositories
                 {
                     order.Status = OrderStatusEnum.Completed;
                     order.CreatedAt = DateTime.UtcNow;
+                    order.PaymentStatus = PaymentStatusEnum.Completed;
 
                     payment.PaymentStatus = PaymentStatusEnum.Completed;
                     payment.TransactionId = res.TransactionId;

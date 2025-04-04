@@ -39,10 +39,13 @@ namespace SalesProject.Models.Domain
         public string OrderCode { get; set; } = string.Empty;
 
 
-        public ICollection<OrderDetails>? OrderDetails { get; set; }
+        public PaymentStatusEnum PaymentStatus { get; set; } = PaymentStatusEnum.Pending;
+
+
+        public ICollection<OrderDetails> OrderDetails { get; set; }  =new List<OrderDetails>();
 
         // 🔹 Quan hệ Nhiều-Nhiều: Một Order có thể có nhiều Discounts
-        public ICollection<OrderDiscounts>? OrderDiscounts { get; set; }
+        public ICollection<OrderDiscounts> OrderDiscounts { get; set; } = new List<OrderDiscounts>();
     }
 
     public enum OrderStatusEnum

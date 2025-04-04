@@ -32,6 +32,9 @@ namespace SalesProject.Data
 
         public DbSet<Address> Addresses { get; set; }
 
+
+        public DbSet<FavoriteProducts> FavoriteProducts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
            
@@ -48,6 +51,7 @@ namespace SalesProject.Data
             builder.ApplyConfiguration(new SubCategoryConfig());
             builder.ApplyConfiguration(new CompareProductConfig());
             builder.ApplyConfiguration(new AddressConfig());
+            builder.ApplyConfiguration(new FavoriteProductConfig());
             base.OnModelCreating(builder);
 
         }

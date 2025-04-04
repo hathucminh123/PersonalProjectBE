@@ -111,4 +111,8 @@ namespace SalesProject.Models.Domain;
                 Tags = Tags != null ? Tags + ", Sale" : "Sale";
             }
         }
-    }
+
+    public ICollection<FavoriteProducts>? favoriteProducts { get; set; }
+
+    public ICollection<CompareProduct> CompareProducts { get; set; } = new List<CompareProduct>();
+}

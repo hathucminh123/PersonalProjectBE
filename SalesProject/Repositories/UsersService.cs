@@ -18,8 +18,12 @@ namespace SalesProject.Repositories
             var user = await salesDbContext.Users
                 .Include(x => x.Orders)
                 .Include(x => x.CartItems)
+                .ThenInclude(x => x.Product)
                 .Include(x => x.Reviews)
                 .Include(x => x.Addresses)
+                .Include(x => x.favoriteProducts)
+                .ThenInclude(x => x.Product)
+
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(x => x.Id == id);
 
@@ -33,11 +37,16 @@ namespace SalesProject.Repositories
         public async Task<Users> UpdateUser(Guid id, Users users)
         {
             var user = await salesDbContext.Users
-                .Include(x => x.Orders)
-                .Include(x => x.CartItems)
-                .Include(x => x.Reviews)
-                .AsSplitQuery()
-                .FirstOrDefaultAsync(x => x.Id == id);
+               .Include(x => x.Orders)
+               .Include(x => x.CartItems)
+               .ThenInclude(x => x.Product)
+               .Include(x => x.Reviews)
+               .Include(x => x.Addresses)
+               .Include(x => x.favoriteProducts)
+               .ThenInclude(x => x.Product)
+
+               .AsSplitQuery()
+               .FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
             {

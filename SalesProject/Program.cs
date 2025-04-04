@@ -73,7 +73,7 @@ builder.Services.AddScoped<IEmailRepository, EmailService>();
 builder.Services.AddScoped<IAddressRepository, AddressService>();
 
 builder.Services.AddScoped<IVnPayService, VnPayService>();
-
+builder.Services.AddScoped<IFavoriteProduct, FavoriteProductService>();
 
 
 

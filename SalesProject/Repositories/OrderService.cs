@@ -284,6 +284,7 @@ public class OrderService : IOrdersRepository
             DiscountAmount = discountAmount,
             PaymentMethod = paymentMethod,
             Status = OrderStatusEnum.Pending,
+            PaymentStatus=PaymentStatusEnum.Pending,
             CreatedAt = DateTime.UtcNow
         };
 

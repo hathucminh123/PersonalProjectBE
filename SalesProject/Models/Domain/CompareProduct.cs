@@ -11,8 +11,14 @@ namespace SalesProject.Models.Domain
         [Required]
         public Guid UserId { get; set; }
 
+        public Users? User { get; set; }
+
+
         [Required]
         public Guid ProductId { get; set; }
+
+
+        public Products? Products { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

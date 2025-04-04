@@ -23,4 +23,11 @@ public class UserDto
     public List<ReviewDto>? Reviews { get; set; }
 
     public List<AddressResponse>? Addresses { get; set; }
+
+
+
+    public List<FavoriteProductsDto>? FavoriteProducts { get; set; } // Danh sách sản phẩm yêu thích
+
+
+    //public List<CompareProductDto>? CompareProducts { get; set; } // Danh sách sản phẩm so sánh
 }

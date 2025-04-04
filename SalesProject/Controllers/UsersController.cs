@@ -119,6 +119,29 @@ public class UsersController : ControllerBase
                 CreatedAt =address.CreatedAt,
 
             }).ToList(),
+            // Thêm ánh xạ cho các thuộc tính khác nếu cần
+            FavoriteProducts = user.favoriteProducts?.Select(fav => new FavoriteProductsDto
+            {
+                Id = fav.Id,
+                Product = fav.Product != null ? new ProductDto
+                {
+                    Id = fav.Product.Id,
+                    Name = fav.Product.Name,
+                    ImageUrl = fav.Product.ImageUrl,
+                    Description = fav.Product.Description,
+
+                    FinalPrice = fav.Product.FinalPrice,
+                    DiscountAmount = fav.Product.DiscountAmount,
+                    OriginalPrice = fav.Product.OriginalPrice,
+                    DiscountPercentage = fav.Product.DiscountPercentage,
+
+
+                } : null,
+
+                //Price = fav.Price
+            }).ToList()
+
+
 
 
         };
