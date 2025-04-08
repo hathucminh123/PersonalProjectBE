@@ -74,6 +74,10 @@ builder.Services.AddScoped<IAddressRepository, AddressService>();
 
 builder.Services.AddScoped<IVnPayService, VnPayService>();
 builder.Services.AddScoped<IFavoriteProduct, FavoriteProductService>();
+builder.Services.AddScoped<IBlogCategoryService, BlogCategoryService>();
+builder.Services.AddScoped<IBlogSubCategoryService, BlogSubCategoryService>();
+builder.Services.AddScoped<IBlogPostService, BlogPostService>();
+
 
 
 

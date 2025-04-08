@@ -114,5 +114,5 @@ namespace SalesProject.Models.Domain;
 
     public ICollection<FavoriteProducts>? favoriteProducts { get; set; }
 
-    public ICollection<CompareProduct> CompareProducts { get; set; } = new List<CompareProduct>();
+    public ICollection<CompareProduct>? CompareProducts { get; set; } 
 }

@@ -107,7 +107,25 @@ namespace SalesProject.Mappings
 
 
             CreateMap<FavoriteProducts, AddFavoriteProductsRespone>();
-              
+
+            CreateMap<BlogCategory, BlogCategoryResponseDto>();
+            CreateMap<BlogCategoryRequestDto, BlogCategory>();
+
+            // BlogSubCategory
+            CreateMap<BlogSubCategory, BlogSubCategoryResponseDto>()
+    .ForMember(dest => dest.BlogCategoryName,
+               opt => opt.MapFrom(src => src.BlogCategory != null ? src.BlogCategory.Name : ""))
+    .ForMember(dest => dest.BlogPosts,
+               opt => opt.MapFrom(src => src.BlogPosts));
+            CreateMap<BlogSubCategoryRequestDto, BlogSubCategory>();
+
+            // BlogPost
+            CreateMap<BlogPost, BlogPostResponseDto>()
+     .ForMember(dest => dest.BlogSubCategoryName,
+                opt => opt.MapFrom(src => src.BlogSubCategory != null ? src.BlogSubCategory.Name : ""));
+            CreateMap<BlogPostRequestDto, BlogPost>();
+
+
 
         }
 

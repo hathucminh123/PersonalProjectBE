@@ -13,8 +13,12 @@ namespace SalesProject.Configuration
             // Configure the primary key
             builder.HasKey(fp => new { fp.UserId, fp.ProductId });
 
-            builder.Property(cp => cp.UserId)
-                   .IsRequired();
+            //builder.Property(cp => cp.UserId)
+            //       .IsRequired();
+
+
+            //builder.Property(cp => cp.ProductId)
+            //       .IsRequired();
 
 
             builder.HasOne(cp => cp.User)
@@ -28,8 +32,6 @@ namespace SalesProject.Configuration
                      .HasForeignKey(cp => cp.ProductId)
                      .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Property(cp => cp.ProductId)
-                   .IsRequired();
 
             builder.Property(cp => cp.CreatedAt)
                    .HasDefaultValueSql("CURRENT_TIMESTAMP");

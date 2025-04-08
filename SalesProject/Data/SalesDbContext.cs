@@ -35,6 +35,10 @@ namespace SalesProject.Data
 
         public DbSet<FavoriteProducts> FavoriteProducts { get; set; }
 
+        public DbSet<BlogCategory> BlogCategories { get; set; }
+        public DbSet<BlogSubCategory> BlogSubCategories { get; set; }
+        public DbSet<BlogPost> BlogPosts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
            
@@ -52,6 +56,11 @@ namespace SalesProject.Data
             builder.ApplyConfiguration(new CompareProductConfig());
             builder.ApplyConfiguration(new AddressConfig());
             builder.ApplyConfiguration(new FavoriteProductConfig());
+
+
+            builder.ApplyConfiguration(new BlogCategoryConfig());
+            builder.ApplyConfiguration(new BlogSubCategoryConfig());
+            builder.ApplyConfiguration(new BlogPostConfig());
             base.OnModelCreating(builder);
 
         }
