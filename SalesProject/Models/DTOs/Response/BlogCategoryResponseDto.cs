@@ -7,5 +7,8 @@
         public string Slug { get; set; } = string.Empty;
 
         public List<BlogSubCategoryResponseDto>? SubCategories { get; set; }
+
+
+        //public List<BlogPostResponseDto>? BlogPosts { get; set } 
     }
 }

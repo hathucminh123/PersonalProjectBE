@@ -16,10 +16,10 @@ namespace SalesProject.Repositories
         }
 
         public async Task<IEnumerable<BlogCategory>> GetAllAsync() =>
-            await _context.BlogCategories.Include(c => c.SubCategories).ToListAsync();
+            await _context.BlogCategories.Include(c => c.SubCategories).ThenInclude(c => c.BlogPosts).ToListAsync();
 
         public async Task<BlogCategory?> GetByIdAsync(int id) =>
-            await _context.BlogCategories.Include(c => c.SubCategories)
+            await _context.BlogCategories.Include(c => c.SubCategories).ThenInclude(c => c.BlogPosts)
                                          .FirstOrDefaultAsync(c => c.Id == id);
 
         public async Task<BlogCategory> CreateAsync(BlogCategory category)

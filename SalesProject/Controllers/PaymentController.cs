@@ -40,7 +40,7 @@ namespace SalesProject.Controllers
             var result = await _vnPayService.PaymentExecuteAsync(Request.Query);
 
             if (result.Success)
-                return Redirect($"http://localhost:5173/User/info?");
+                return Redirect($"http://localhost:5173/User/orders");
 
             return Redirect("/payment-failed");
         }

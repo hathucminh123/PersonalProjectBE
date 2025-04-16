@@ -17,7 +17,8 @@ namespace SalesProject.Repositories
         public async Task<IEnumerable<BlogSubCategory>> GetAllAsync()
         {
             return await _context.BlogSubCategories
-                .Include(sc => sc.BlogCategory)
+                .Include(sc => sc.BlogCategory).Include(sc => sc.BlogPosts)
+
                 .ToListAsync();
         }
 
